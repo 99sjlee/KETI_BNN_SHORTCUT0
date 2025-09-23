@@ -1,7 +1,6 @@
 #include "platform_info.h"
 #include "ervp_printf.h"
 #include "ervp_reg_util.h"
-#include "mem_1_4.h"
 #include "mem_0_4.h"
 #include "sw_0_4.h"
 #include "inst.h"
@@ -59,35 +58,14 @@ bool apb_setting(uint16_t iter, inst_param_t sc_pr, uint64_t hw_mem_addr){
 
 	REG32(get_bnn_apb_addr(0x2a8)) = 0x04;
 
-	if(HAS(sc_pr.SCENARIO_NAME, "shortcut0")) {
-		REG32(get_bnn_apb_addr(0x30)) = sc_pr.DRAM_PEA_BWEIGHTOFFSET[0] + iter*(sc_pr.DRAM_BWEIGHTLENGTH[0] << 3);
-		REG32(get_bnn_apb_addr(0x38)) = sc_pr.DRAM_PEA_BWEIGHTOFFSET[1] + iter*(sc_pr.DRAM_BWEIGHTLENGTH[0] << 3);
-		REG32(get_bnn_apb_addr(0x40)) = sc_pr.DRAM_PEA_BWEIGHTOFFSET[2] + iter*(sc_pr.DRAM_BWEIGHTLENGTH[0] << 3);
-		REG32(get_bnn_apb_addr(0x48)) = sc_pr.DRAM_BWEIGHTLENGTH[0];
+	REG32(get_bnn_apb_addr(0x30)) = sc_pr.DRAM_PEA_BWEIGHTOFFSET[0] + iter*(sc_pr.DRAM_BWEIGHTLENGTH[0] << 3);
+	REG32(get_bnn_apb_addr(0x38)) = sc_pr.DRAM_PEA_BWEIGHTOFFSET[1] + iter*(sc_pr.DRAM_BWEIGHTLENGTH[0] << 3);
+	REG32(get_bnn_apb_addr(0x40)) = sc_pr.DRAM_PEA_BWEIGHTOFFSET[2] + iter*(sc_pr.DRAM_BWEIGHTLENGTH[0] << 3);
+	REG32(get_bnn_apb_addr(0x48)) = sc_pr.DRAM_BWEIGHTLENGTH[0];
 
-		REG32(get_bnn_apb_addr(0x50)) = sc_pr.DRAM_PEA_ALPHAOFFSET + iter*(8 << 3);
-		REG32(get_bnn_apb_addr(0x58)) = sc_pr.DRAM_PEA_BETAOFFSET + iter*(8 << 3);
-		REG32(get_bnn_apb_addr(0x60)) = sc_pr.DRAM_CLENGTH[0];
-	}
-	else{
-		REG32(get_bnn_apb_addr(0x30)) = sc_pr.DRAM_PEA_BWEIGHTOFFSET[0] + iter*(sc_pr.DRAM_BWEIGHTLENGTH[1] << 3);
-		REG32(get_bnn_apb_addr(0x38)) = sc_pr.DRAM_PEA_BWEIGHTOFFSET[1] + iter*(sc_pr.DRAM_BWEIGHTLENGTH[1] << 3);
-		REG32(get_bnn_apb_addr(0x40)) = sc_pr.DRAM_PEA_BWEIGHTOFFSET[2] + iter*(sc_pr.DRAM_BWEIGHTLENGTH[1] << 3);
-		REG32(get_bnn_apb_addr(0x48)) = sc_pr.DRAM_BWEIGHTLENGTH[1];
-
-		REG32(get_bnn_apb_addr(0x288)) = sc_pr.DRAM_LPEA_BWEIGHTOFFSET[0] + iter*(sc_pr.DRAM_LPEA_BWEIGHTLENGTH << 3);
-		REG32(get_bnn_apb_addr(0x290)) = sc_pr.DRAM_LPEA_BWEIGHTOFFSET[1] + iter*(sc_pr.DRAM_LPEA_BWEIGHTLENGTH << 3);
-		REG32(get_bnn_apb_addr(0x298)) = sc_pr.DRAM_LPEA_BWEIGHTOFFSET[2] + iter*(sc_pr.DRAM_LPEA_BWEIGHTLENGTH << 3);
-		REG32(get_bnn_apb_addr(0x2a0)) = sc_pr.DRAM_LPEA_BWEIGHTLENGTH;
-
-		REG32(get_bnn_apb_addr(0x50)) = sc_pr.DRAM_PEA_ALPHAOFFSET + iter*(8 << 3);
-		REG32(get_bnn_apb_addr(0x58)) = sc_pr.DRAM_PEA_BETAOFFSET + iter*(8 << 3);
-		REG32(get_bnn_apb_addr(0x60)) = sc_pr.DRAM_CLENGTH[1];
-
-		REG32(get_bnn_apb_addr(0x9f8)) = sc_pr.PW_W_ADDR_OFFSET;
-		REG32(get_bnn_apb_addr(0xa00)) = sc_pr.PW_W_ADDR_OFFSET;
-		REG32(get_bnn_apb_addr(0xa08)) = sc_pr.PW_W_ADDR_OFFSET;
-	}
+	REG32(get_bnn_apb_addr(0x50)) = sc_pr.DRAM_PEA_ALPHAOFFSET + iter*(8 << 3);
+	REG32(get_bnn_apb_addr(0x58)) = sc_pr.DRAM_PEA_BETAOFFSET + iter*(8 << 3);
+	REG32(get_bnn_apb_addr(0x60)) = sc_pr.DRAM_CLENGTH[0];
 
 	REG32(get_bnn_apb_addr(0x70)) = sc_pr.DRAM_FIOFMAPLENGTH;
 
