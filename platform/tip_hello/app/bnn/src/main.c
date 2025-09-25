@@ -196,21 +196,6 @@ int run_bnn_sw(){
 	memcpy(bn_beta, sw_bb_0_4, sizeof(sw_bb_0_4));
 	memcpy(sinput, sw_si_0_4, sizeof(sw_si_0_4));
 
-	int mcmp1 = memory_compare(input, sw_0_4, sizeof(sw_0_4), 0);
-	int mcmp2 = memory_compare(weights, sw_w_0_4, sizeof(sw_w_0_4), 0);
-	int mcmp3 = memory_compare(bn_alpha, sw_ba_0_4, sizeof(sw_ba_0_4), 0);
-	int mcmp4 = memory_compare(bn_beta, sw_bb_0_4, sizeof(sw_bb_0_4), 0);
-	
-	flush_cache();
-	int all_are_equal = 1;
-	all_are_equal &= (mcmp1&mcmp2&mcmp3&mcmp4);
-	if(all_are_equal){
-		printf("\nSW INPUT memory all correct");
-	}
-	else{
-		printf("\nSW INPUT memory some incorrect");
-	}
-
 	uint64_t sw_tick = get_real_clock_tick();
 	uint16_t batch_size = 1;
 	uint16_t H = 8, W = 8, C = 128;
@@ -295,7 +280,7 @@ int run_bnn_sw(){
 	float sw_ms = (float)(sw_total) / 1000;
 	printf("\nSW Total Tick %llu", sw_total);
 	printf("\nSW Total Time (ms) %.3f", sw_ms);
-	all_are_equal = 1;
+	int all_are_equal = 1;
 	int mcmp = memory_compare(output, sw_o_0_4, sizeof(sw_o_0_4), 0);
 	all_are_equal &= mcmp;
 	if(all_are_equal){
@@ -329,12 +314,6 @@ int main() {
 	int single_test_size = sizeof(mem_0_4);
 	memcpy(hw_mem_addr, mem_0_4, single_test_size);
 	flush_cache();
-	int mcmp = memory_compare(hw_mem_addr, mem_0_4, single_test_size, 0);
-	all_are_equal &= mcmp;
-	if(all_are_equal)
-		printf("\nHW INPUT memory all correct");
-	else
-		printf("\nHW INPUT memory some incorrect");
 	inst_param_t sc_pr;
 	if (!inst_fill("shortcut0_4", &sc_pr)) {
 		printf("inst_fill_params failed\n");
