@@ -1,0 +1,6 @@
+<?xml version="1.0" ?>
+<rvx_sudo_config>
+  <stores_sudo_info encoded="False">True</stores_sudo_info>
+  <is_nopasswd_for_sudo encoded="False">False</is_nopasswd_for_sudo>
+  <sudo_passwd encoded="True">gAAAAABo26BgI_rFk5xglb23RRfvnOAL3l2xIMtLErMFmyZUneW4QZof2-Fr29sb7gP2aYrGlJGqiEsrNqOl8JOmqgRZgrUdHQ==</sudo_passwd>
+</rvx_sudo_config>
